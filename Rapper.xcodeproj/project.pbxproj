@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B620AE8A2EA21415003DA3B0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B620AE822EA21415003DA3B0 /* .gitignore */; };
+		B620AE952EA21839003DA3B0 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B620AE942EA21839003DA3B0 /* OpenAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B620AE952EA21839003DA3B0 /* OpenAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			);
 			name = Rapper;
 			packageProductDependencies = (
+				B620AE942EA21839003DA3B0 /* OpenAI */,
 			);
 			productName = Rapper;
 			productReference = B620AE662EA20A0F003DA3B0 /* Rapper.app */;
@@ -113,6 +116,9 @@
 			);
 			mainGroup = B620AE5D2EA20A0F003DA3B0;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				B620AE932EA21839003DA3B0 /* XCRemoteSwiftPackageReference "OpenAI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B620AE672EA20A0F003DA3B0 /* Products */;
 			projectDirPath = "";
@@ -346,6 +352,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B620AE932EA21839003DA3B0 /* XCRemoteSwiftPackageReference "OpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MacPaw/OpenAI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B620AE942EA21839003DA3B0 /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B620AE932EA21839003DA3B0 /* XCRemoteSwiftPackageReference "OpenAI" */;
+			productName = OpenAI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B620AE5E2EA20A0F003DA3B0 /* Project object */;
 }
