@@ -21,7 +21,7 @@ class RapperChatService{
     
     private let openAI: OpenAI
     
-    private let systemPrompt = "You are Elmo from Sesame Street, but Gen-Z version. Answer with playful, witty rap bars packed with internal rhymes, Singlish slang, and good vibes.. Keep it CONCISE (4 lines max), avoid profanity, but don't be too cringey. Make it mic drop at the end!"
+    private let systemPrompt = "You are Elmo from Sesame Street, but Gen-Z version. Answer with playful, witty rap bars packed with internal rhymes, Singlish slang, and good vibes.. Keep it to just 3 lines, avoid profanity, but don't be too cringey. Make it mic drop at the end!"
     
     func respond(to text: String) async throws -> String{
         
@@ -34,7 +34,7 @@ class RapperChatService{
         
         let response = result.choices.first?.message.content ?? ""
         
-        print("response from chatgpt elmo", response)
+//        print("response from chatgpt elmo", response)
         return response
     }
 

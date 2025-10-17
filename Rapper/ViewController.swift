@@ -25,6 +25,12 @@ import OpenAI
           button.setTitle("Hit it!", for: .normal)
           return button
       }()
+      
+      private let resetSession: UIButton = {
+          let button = UIButton(type: .system)
+          button.setTitle("Reset Session", for: .normal)
+          return button
+      }()
 
       private let responseView: UITextView = {
           let textView = UITextView()
@@ -44,7 +50,7 @@ import OpenAI
           super.viewDidLoad()
           view.backgroundColor = .systemBackground
 
-          let stack = UIStackView(arrangedSubviews: [promptField, sendButton, responseView])
+          let stack = UIStackView(arrangedSubviews: [promptField, sendButton, responseView, resetSession])
           stack.axis = .vertical
           stack.spacing = 16
           stack.translatesAutoresizingMaskIntoConstraints = false
@@ -59,6 +65,8 @@ import OpenAI
           ])
 
           sendButton.addTarget(self, action: #selector(sendTapped), for: .touchUpInside)
+          
+          resetSession.addTarget(self, action: #selector(resetSessionAction) , for: .touchUpInside)
       }
       
 
@@ -86,6 +94,12 @@ import OpenAI
  
           }
 
+      }
+      
+      @objc func resetSessionAction(){
+          self.responseView.text = "Give Elmo a beat!"
+          promptField.text = ""
+          promptField.placeholder = "Ask rap mentor ELMO here …"
       }
   }
 
