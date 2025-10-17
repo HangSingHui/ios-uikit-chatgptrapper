@@ -10,6 +10,7 @@ import OpenAI
 
   final class ViewController: UIViewController {
       
+      private var discoTimer: Timer?
       private let chatService = RapperChatService()
       
       private let promptField: UITextField = {
@@ -71,7 +72,7 @@ import OpenAI
       
 
       @objc private func sendTapped() {
-          // TODO: Call your chat service and update responseView.text with the returned bars.
+          startDiscoAnimation()
    
           Task { [weak self] in
               guard let self = self else { return }
@@ -79,6 +80,7 @@ import OpenAI
               
               if userPrompt == ""{
                   self.responseView.text = "Give Elmo a beat!"
+                  self.stopDiscoAnimation()
                   return
               }
               
@@ -86,14 +88,48 @@ import OpenAI
                   self.responseView.text = "Lil Mo's cooking up some bars...🎙️"
                   let response = try await chatService.respond(to: userPrompt)
                   responseView.text = response
+                  self.stopDiscoAnimation()
                   }
                   
               catch{
                   responseView.text = "Elmo forget his lyrics ... \(error.localizedDescription)"
+                  self.stopDiscoAnimation()
               }
  
           }
 
+      }
+      
+      private func startDiscoAnimation() {
+          let colors: [UIColor] = [
+              .systemRed.withAlphaComponent(0.3),
+              .systemBlue.withAlphaComponent(0.3),
+              .systemGreen.withAlphaComponent(0.3),
+              .systemPurple.withAlphaComponent(0.3),
+              .systemOrange.withAlphaComponent(0.3),
+          ]
+          var currentIndex = 0
+          
+          discoTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] timer in
+              guard let self = self else {
+                  timer.invalidate()
+                  return
+              }
+              
+              UIView.animate(withDuration: 0.5) {
+                  self.responseView.backgroundColor = colors[currentIndex]
+              }
+              
+              currentIndex = (currentIndex + 1) % colors.count
+          }
+      }
+
+      private func stopDiscoAnimation() {
+          discoTimer?.invalidate()
+          discoTimer = nil
+          UIView.animate(withDuration: 0.5) {
+              self.responseView.backgroundColor = .secondarySystemBackground
+          }
       }
       
       @objc func resetSessionAction(){
